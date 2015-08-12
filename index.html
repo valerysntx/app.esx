@@ -5,48 +5,58 @@
 		app.es
 	</title>
 
-
-		<script type="text/javascript" src="node_modules/traceur/bin/traceur.js"></script>
-		<script type="text/javascript" src="node_modules/systemjs/dist/system.js"></script>
-		<script type="text/javascript" src="config.js"></script>
-
-<script type="text/javascript">
-
-System.config({ 
-  traspiller:"traceur"
-});
-
+<script type="text/javascript" 
+        src="node_modules/systemjs/dist/system.js" defer>
 </script>
-
-
-</head>
-
-<body>
 
 <script type="module" src="injector.js"></script>
 
+<script>
 
- <script type="text/javascript">
+System.config({ 
+  "baseURL": "/",
+  "transpiler": "traceur",
+  "paths": {
+    "*": "*.js",
+    "github:*": "jspm_packages/github/*.js",
+    "npm:*":"jspm_packages/npm/*.js"
+  },
+ "map": {
+    "guybedford/system-md": "github:guybedford/system-md@0.0.1",
+    "knockout": "github:knockout/knockout@3.3.0",
+    "traceur": "node_modules/traceur/bin/traceur@0.0.90"
+    "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.88",
+    "github:guybedford/system-md@0.0.1": {
+      "showdown": "github:showdownjs/showdown@0.3.4"
+    }
+  }
+  
+});
 
- System.import("timeout").then(function(timeout){ return timeout.default })
-		  	 .then( function(timeout){ return timeout(300) })
-			 .then(function(){ console.log("timeout!")});
+</script>
+</head>
 
-
-var Injector = System.import("injector").then(function(Injector){   
-
+<body controller="app">
+<template>
+    <header model="header"></header>
+    <jumbo model="jumbo"></jumbo>
+</template>
+<script>
+  System.import("injector").then((Injector) => {   
 	return Injector.default;
-	
-   }).then(function(Injector){
+  }).then((Injector) => {
 
-      var injector = Injector();
+        var injector = Injector();
 
-		var ViewModelA = {
-		   initialize: function () {
-		     console.log('ViewModelA');
-		  }
+
+	    var Header = function (headerText){
+		    this.headerText = headerText;
+
+		    injector.register('Header', this);
+		    injector.process(Header);
 		};
-		var ViewModelB = {
+
+		class Jumbo = {
 		    initialize: function () {
 		        console.log('ViewModelB');
 		   }
