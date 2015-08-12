@@ -75,3 +75,4 @@ $RECYCLE.BIN/
 *.lnk
 *.sublime-workspace
 app.es.sublime-project
+jspm_packages/

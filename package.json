@@ -16,8 +16,7 @@
   "devDependencies": {
     "jspm": "^0.15.7",
     "traceur": "^0.0.90",
-    "systemjs": "^0.18.9",
-    "http-server":"^3.0.0"
+    "systemjs": "^0.18.9"
   },
   "jspm": {
     "directories": {},
