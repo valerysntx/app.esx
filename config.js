@@ -4,8 +4,11 @@ System.config({
   "paths": {
     "*": "*.js",
     "github:*": "jspm_packages/github/*.js"
-  },
- "map": {
+  }
+});
+
+System.config({
+  "map": {
     "guybedford/system-md": "github:guybedford/system-md@0.0.1",
     "knockout": "github:knockout/knockout@3.3.0",
     "traceur": "github:jmcriffey/bower-traceur@0.0.88",

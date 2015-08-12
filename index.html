@@ -6,10 +6,8 @@
 	</title>
 
 <script type="text/javascript" 
-        src="node_modules/systemjs/dist/system.js" defer>
+        src="node_modules/systemjs/dist/system.js">
 </script>
-
-<script type="module" src="injector.js"></script>
 
 <script>
 
@@ -24,7 +22,7 @@ System.config({
  "map": {
     "guybedford/system-md": "github:guybedford/system-md@0.0.1",
     "knockout": "github:knockout/knockout@3.3.0",
-    "traceur": "node_modules/traceur/bin/traceur@0.0.90"
+    "traceur": "node_modules/traceur/bin/traceur@0.0.90",
     "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.88",
     "github:guybedford/system-md@0.0.1": {
       "showdown": "github:showdownjs/showdown@0.3.4"
@@ -34,13 +32,21 @@ System.config({
 });
 
 </script>
+
+<script type="module" src="github:knockout"></script>
+
+
 </head>
 
-<body controller="app">
-<template>
-    <header model="header"></header>
-    <jumbo model="jumbo"></jumbo>
-</template>
+<body>
+
+<script type="text/html" id="template">
+    <div data-bind="html: header" class="ui segment message green"></div>
+    <div data-bind="html: jumbo" class="ui segment message blue"></div>
+</script>
+
+<div data-bind="template: 'template'" class="ui segment basic"></div>
+
 <script>
   System.import("injector").then((Injector) => {   
 	return Injector.default;
@@ -48,30 +54,37 @@ System.config({
 
         var injector = Injector();
 
-
 	    var Header = function (headerText){
 		    this.headerText = headerText;
+		    return {
+		    	data : headerText  
+		    }
+		}
 
-		    injector.register('Header', this);
-		    injector.process(Header);
-		};
+	    var Jumbo = function (jumboText){
+		    this.jumboText = jumboText;
+		    return {
+		    	data : jumboText  
+		    }
+		}
 
-		class Jumbo = {
-		    initialize: function () {
-		        console.log('ViewModelB');
-		   }
+		var ApplicationController = function (Jumbo, Header) {
+		     ko.applyBindings({ 
+		     	 header: ko.observable(Header.data),
+		     	 jumbo: ko.observable(Jumbo.data) 
+		      });
 		};
+	
+	injector.register('Header', new Header( System.import("header!md")
+								.then((headerText)=>{  return headerText  })));
 		
-		
-		var WelcomeController = function (ViewModel) {
-		     ViewModel.initialize();
-		};
-		
-		injector.register('ViewModel', Math.random() > 0.5 ? ViewModelA : ViewModelB);
-		
-		injector.process(WelcomeController);
+	injector.register('Jumbo', new Jumbo( System.import("jumbo!md")
+								.then((jumboText)=>{  return jumboText  })));
 
-	});
+
+	injector.process(ApplicationController);
+
+});
 
 </script>
 </body>
