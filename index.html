@@ -6,34 +6,47 @@
 	</title>
 
 <script type="text/javascript" 
-        src="node_modules/systemjs/dist/system.js">
-</script>
+        src="node_modules/systemjs/dist/system.js"></script>
 
 <script>
+
 
 System.config({ 
   "baseURL": "/",
   "transpiler": "traceur",
   "paths": {
-    "*": "*.js",
-    "github:*": "jspm_packages/github/*.js",
-    "npm:*":"jspm_packages/npm/*.js"
+    // '*': 'https://registry.jspm.io/*.js',
+    //"github:*" : 'https://github.jspm.io/*.js', 
+    //"~/*":"*.js", 
+     "*": "*.js",
+     "github:*": "jspm_packages/github/*.js",
+     "npm:*":"jspm_packages/npm/*.js"
   },
  "map": {
+  "md":"github:guybedford/system-md@0.0.1",
+  "showdown@0.3.1": "jspm_packages/github/showdownjs/showdown@0.3.4/compressed/showdown.min",
     "guybedford/system-md": "github:guybedford/system-md@0.0.1",
     "knockout": "github:knockout/knockout@3.3.0",
-    "traceur": "node_modules/traceur/bin/traceur@0.0.90",
+    "traceur": "node_modules/traceur/bin/traceur",
     "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.88",
     "github:guybedford/system-md@0.0.1": {
-      "showdown": "github:showdownjs/showdown@0.3.4"
+      "showdown@0.3.1": "github:showdownjs/showdown@0.3.4"
     }
   }
   
 });
 
-</script>
+		var SystemInjector = function(injector,package){
+			return new Promise((resolve, reject)=>{
+		       return System.import(package).then((pkg)=>{ 
+		       	injector.register(package,pkg); 
+		            return resolve(pkg);
+		       	 }).catch(reject);
+			});
+		};
 
-<script type="module" src="github:knockout"></script>
+		
+</script>
 
 
 </head>
@@ -41,50 +54,60 @@ System.config({
 <body>
 
 <script type="text/html" id="template">
-    <div data-bind="html: header" class="ui segment message green"></div>
-    <div data-bind="html: jumbo" class="ui segment message blue"></div>
+    <div data-bind="text: header.parse" class="ui segment message green"></div>
+    <div data-bind="text: jumbo.parse" class="ui segment message blue"></div>
 </script>
 
 <div data-bind="template: 'template'" class="ui segment basic"></div>
 
 <script>
+
   System.import("injector").then((Injector) => {   
+
 	return Injector.default;
+
   }).then((Injector) => {
 
-        var injector = Injector();
+	var injector = Injector();
 
-	    var Header = function (headerText){
-		    this.headerText = headerText;
-		    return {
-		    	data : headerText  
-		    }
-		}
+	System.import("knockout").then((ko)=> { window.ko = ko; return ko }).then((ko)=>{
+    
+	var Header = {
+		    parse: ko.computed(function(){
+		     		return System.import('/templates/header.md!md')
+		   			 	.then((html)=>{ 
+		   			 		console.log(html);
+		   			 		 return html
+		   			 		})
+		   			 }, { deferEvaluation: true })
+	}
 
-	    var Jumbo = function (jumboText){
-		    this.jumboText = jumboText;
-		    return {
-		    	data : jumboText  
-		    }
-		}
-
-		var ApplicationController = function (Jumbo, Header) {
-		     ko.applyBindings({ 
-		     	 header: ko.observable(Header.data),
-		     	 jumbo: ko.observable(Jumbo.data) 
-		      });
-		};
-	
-	injector.register('Header', new Header( System.import("header!md")
-								.then((headerText)=>{  return headerText  })));
+	var Jumbo = {
+		    parse: ko.computed(function(){
+		     		return System.import('/templates/jumbo.md!md')
+		   			 	.then((html)=>{ 
+		   			 		 console.log(html);
+		   			 		 return html
+		   			 		})
+		   			 }, { deferEvaluation: true })
+		}		 		
 		
-	injector.register('Jumbo', new Jumbo( System.import("jumbo!md")
-								.then((jumboText)=>{  return jumboText  })));
+		injector.register('Header', Header);
+		injector.register('Jumbo',  Jumbo);
+         
+		var ApplicationViewModel = function (Header, Jumbo) {
+              ko.applyBindings({ header: Header, jumbo: Jumbo });		  
+  		}
+  		
+  		injector.register('ApplicationViewModel',ApplicationViewModel);
 
+	    injector.process(ApplicationViewModel);
+        return injector; 
+	}); 
 
-	injector.process(ApplicationController);
-
+//inject dependencies
 });
+  
 
 </script>
 </body>
