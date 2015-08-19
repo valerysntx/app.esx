@@ -1,0 +1,15 @@
+version: 0.0.{build}
+init:
+- npm install -g jspm
+install:
+- jspm set local
+- jspm install
+- jspm dl-loader babel
+nuget:
+  account_feed: true
+  project_feed: true
+  disable_publish_on_pr: true
+build_script:
+- jspm clean
+- jspm dl-loader babel
+- jspm bundle ApplicationViewModel dist/app.js

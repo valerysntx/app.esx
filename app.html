@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		app.es
+	</title>
+
+  <script src="node_modules/systemjs/dist/system.js"></script>
+  <script src="config.js"></script>
+
+</head>
+
+<body>
+
+<script type="text/html" id="template">
+    <div data-bind="html: header" class="ui segment message green"></div>
+    <div data-bind="html: jumbo" class="ui segment message blue"></div>
+</script>
+
+<div data-bind="template: 'template'" class="ui segment basic"></div>
+  
+<script>
+  
+  System.import("ApplicationViewModel").then(function(app) {
+	     app.ApplicationViewModel.initialize();
+  });	
+
+</script>
+
+
+</body>
+</html>
