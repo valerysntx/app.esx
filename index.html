@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>app.esx by valerysntx</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/valerysntx/app.esx">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/valerysntx/app.esx/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/valerysntx/app.esx/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>app.esx</h1>
+          <p>jspm app esx</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/valerysntx">valerysntx</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>
+<a id="appesx-" class="anchor" href="#appesx-" aria-hidden="true"><span class="octicon octicon-link"></span></a>app.esx <a href="https://ci.appveyor.com/project/valerysntx/app-esx"><img src="https://ci.appveyor.com/api/projects/status/2kimgb4qjb4c1cw4?svg=true" alt="Build status"></a>
+</h1>
+
+<p>jspm, systemjs, traceur, knockout </p>
+
+<h1>
+<a id="es6-modular-application" class="anchor" href="#es6-modular-application" aria-hidden="true"><span class="octicon octicon-link"></span></a>es6 modular application</h1>
+
+<ul>
+<li>run modular es6 in browser</li>
+<li>tested on chrome v44, edge </li>
+</ul>
+
+<h1>
+<a id="install--run-localhost8080" class="anchor" href="#install--run-localhost8080" aria-hidden="true"><span class="octicon octicon-link"></span></a>install / run localhost:8080</h1>
+
+<div class="highlight highlight-shell"><pre>npm install -g jspm
+npm install -g http-server
+jspm config <span class="pl-k">local</span>
+jspm install
+http-server <span class="pl-c1">.</span></pre></div>
+
+<h1>
+<a id="build--bundle-not-required" class="anchor" href="#build--bundle-not-required" aria-hidden="true"><span class="octicon octicon-link"></span></a>build / bundle (not required)</h1>
+
+<div class="highlight highlight-shell"><pre>jspm clear
+jspm dl-loader babel 
+jspm bundle ApplicationViewModel dist/app.js -minify</pre></div>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
