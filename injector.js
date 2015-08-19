@@ -1,5 +1,5 @@
 
-export default function Injector() {
+var Injector = function () {
 
     var injector = {
 
@@ -29,7 +29,6 @@ export default function Injector() {
     };
 
     return injector;
+}
 
-};
-
-
+export {Injector}

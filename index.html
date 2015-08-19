@@ -5,110 +5,28 @@
 		app.es
 	</title>
 
-<script type="text/javascript" 
-        src="node_modules/systemjs/dist/system.js"></script>
-
-<script>
-
-
-System.config({ 
-  "baseURL": "/",
-  "transpiler": "traceur",
-  "paths": {
-    // '*': 'https://registry.jspm.io/*.js',
-    //"github:*" : 'https://github.jspm.io/*.js', 
-    //"~/*":"*.js", 
-     "*": "*.js",
-     "github:*": "jspm_packages/github/*.js",
-     "npm:*":"jspm_packages/npm/*.js"
-  },
- "map": {
-  "md":"github:guybedford/system-md@0.0.1",
-  "showdown@0.3.1": "jspm_packages/github/showdownjs/showdown@0.3.4/compressed/showdown.min",
-    "guybedford/system-md": "github:guybedford/system-md@0.0.1",
-    "knockout": "github:knockout/knockout@3.3.0",
-    "traceur": "node_modules/traceur/bin/traceur",
-    "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.88",
-    "github:guybedford/system-md@0.0.1": {
-      "showdown@0.3.1": "github:showdownjs/showdown@0.3.4"
-    }
-  }
-  
-});
-
-		var SystemInjector = function(injector,package){
-			return new Promise((resolve, reject)=>{
-		       return System.import(package).then((pkg)=>{ 
-		       	injector.register(package,pkg); 
-		            return resolve(pkg);
-		       	 }).catch(reject);
-			});
-		};
-
-		
-</script>
-
+  <script src="node_modules/systemjs/dist/system.js"></script>
+  <script src="config.js"></script>
 
 </head>
 
 <body>
 
 <script type="text/html" id="template">
-    <div data-bind="text: header.parse" class="ui segment message green"></div>
-    <div data-bind="text: jumbo.parse" class="ui segment message blue"></div>
+    <div data-bind="html: header" class="ui segment message green"></div>
+    <div data-bind="html: jumbo" class="ui segment message blue"></div>
 </script>
 
 <div data-bind="template: 'template'" class="ui segment basic"></div>
-
-<script>
-
-  System.import("injector").then((Injector) => {   
-
-	return Injector.default;
-
-  }).then((Injector) => {
-
-	var injector = Injector();
-
-	System.import("knockout").then((ko)=> { window.ko = ko; return ko }).then((ko)=>{
-    
-	var Header = {
-		    parse: ko.computed(function(){
-		     		return System.import('/templates/header.md!md')
-		   			 	.then((html)=>{ 
-		   			 		console.log(html);
-		   			 		 return html
-		   			 		})
-		   			 }, { deferEvaluation: true })
-	}
-
-	var Jumbo = {
-		    parse: ko.computed(function(){
-		     		return System.import('/templates/jumbo.md!md')
-		   			 	.then((html)=>{ 
-		   			 		 console.log(html);
-		   			 		 return html
-		   			 		})
-		   			 }, { deferEvaluation: true })
-		}		 		
-		
-		injector.register('Header', Header);
-		injector.register('Jumbo',  Jumbo);
-         
-		var ApplicationViewModel = function (Header, Jumbo) {
-              ko.applyBindings({ header: Header, jumbo: Jumbo });		  
-  		}
-  		
-  		injector.register('ApplicationViewModel',ApplicationViewModel);
-
-	    injector.process(ApplicationViewModel);
-        return injector; 
-	}); 
-
-//inject dependencies
-});
   
+<script>
+  
+  System.import("ApplicationViewModel").then(function(app) {
+	     app.ApplicationViewModel.initialize();
+  });	
 
 </script>
+
+
 </body>
 </html>
