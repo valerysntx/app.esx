@@ -5,74 +5,28 @@
 		app.es
 	</title>
 
-<script type="text/javascript" 
-        src="node_modules/systemjs/dist/system.js" defer>
-</script>
+  <script src="node_modules/systemjs/dist/system.js"></script>
+  <script src="config.js"></script>
 
-<script type="module" src="injector.js"></script>
-
-<script>
-
-System.config({ 
-  "baseURL": "/",
-  "transpiler": "traceur",
-  "paths": {
-    "*": "*.js",
-    "github:*": "jspm_packages/github/*.js",
-    "npm:*":"jspm_packages/npm/*.js"
-  },
- "map": {
-    "guybedford/system-md": "github:guybedford/system-md@0.0.1",
-    "knockout": "github:knockout/knockout@3.3.0",
-    "traceur": "node_modules/traceur/bin/traceur@0.0.90"
-    "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.88",
-    "github:guybedford/system-md@0.0.1": {
-      "showdown": "github:showdownjs/showdown@0.3.4"
-    }
-  }
-  
-});
-
-</script>
 </head>
 
-<body controller="app">
-<template>
-    <header model="header"></header>
-    <jumbo model="jumbo"></jumbo>
-</template>
+<body>
+
+<script type="text/html" id="template">
+    <div data-bind="html: header" class="ui segment message green"></div>
+    <div data-bind="html: jumbo" class="ui segment message blue"></div>
+</script>
+
+<div data-bind="template: 'template'" class="ui segment basic"></div>
+  
 <script>
-  System.import("injector").then((Injector) => {   
-	return Injector.default;
-  }).then((Injector) => {
-
-        var injector = Injector();
-
-
-	    var Header = function (headerText){
-		    this.headerText = headerText;
-
-		    injector.register('Header', this);
-		    injector.process(Header);
-		};
-
-		class Jumbo = {
-		    initialize: function () {
-		        console.log('ViewModelB');
-		   }
-		};
-		
-		
-		var WelcomeController = function (ViewModel) {
-		     ViewModel.initialize();
-		};
-		
-		injector.register('ViewModel', Math.random() > 0.5 ? ViewModelA : ViewModelB);
-		
-		injector.process(WelcomeController);
-
-	});
+  
+  System.import("ApplicationViewModel").then(function(app) {
+	     app.ApplicationViewModel.initialize();
+  });	
 
 </script>
+
+
 </body>
 </html>
