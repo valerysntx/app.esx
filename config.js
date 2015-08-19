@@ -13,6 +13,14 @@ System.config({
       "jumbo",
       "github:knockout/knockout@3.3.0",
       "ApplicationViewModel"
+    ],
+    "build": [
+      "github:knockout/knockout@3.3.0/dist/knockout.debug",
+      "header",
+      "jumbo",
+      "github:knockout/knockout@3.3.0",
+      "ApplicationViewModel",
+      "app"
     ]
   }
 });
