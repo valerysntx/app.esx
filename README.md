@@ -1,5 +1,7 @@
-# app.esx
+# app.esx [![Build status](https://ci.appveyor.com/api/projects/status/2kimgb4qjb4c1cw4?svg=true)](https://ci.appveyor.com/project/valerysntx/app-esx)
 jspm, systemjs, traceur, knockout 
+
+
 
 #es6 modular application
 * run modular es6 in browser
