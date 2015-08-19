@@ -3,8 +3,8 @@ System.config({
   "transpiler": "traceur",
   "paths": {
     "*": "*.js",
-    "github:*": "jspm_packages/github/*.js",
-    "npm:*": "jspm_packages/npm/*.js"
+    "github:*": "https://github.jspm.io/*.js",
+    "npm:*": "https://npm.jspm.io/*.js"
   },
   "bundles": {
     "dist/app": [
@@ -26,7 +26,7 @@ System.config({
     "traceur": "github:jmcriffey/bower-traceur@0.0.88",
     "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.88",
     "github:guybedford/system-md@0.0.1": {
-      "showdown@0.3.1": "github:showdownjs/showdown@0.3.4"
+      "showdown": "github:showdownjs/showdown@0.3.4"
     }
   }
 });
