@@ -1,7 +1,7 @@
 
 var Iframe  = {
 	parse:  function(){ 
-		return System.import('oneTwoThree.html?').then((html)=>{ 
+		return System.import('Iframe.html!text').then((html)=>{ 
 								console.log(html); return html;
 							});
 	},

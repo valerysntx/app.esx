@@ -12,72 +12,20 @@
 
 <body>
 
-<script type="text/javascript">
+<div data-bind="template: 'ApplicationViewModel'"></div>
 
-
-</script>
-
-<script type="iframe/html" id="template">
-    <div data-bind="html: header" class="ui segment message green"></div>
-    <div data-bind="html: jumbo" class="ui segment message blue"></div>
-</script>
-
-<script type="text/html" id="template">
-    <div data-bind="html: header" class="ui segment message green"></div>
-    <div data-bind="html: jumbo" class="ui segment message blue"></div>
-    <div data-bind="html: iframe" class="ui segment message blue"></div>
-</script>
-
-<div data-bind="template: 'template'" class="ui segment basic"></div>
-<div data-bind="template: 'template', src: src" class="ui segment basic"></div>
-
-
-<!-- ko randomOrder: true -->
-    <div>?</div>
-    <div>Second</div>
-    <div>Third</div>
-<!-- /ko -->
-
-<script id="inject" type="text/html">
-  <script type="module" src="vtree"></script>
+<script type="text/html" id="ApplicationViewModel">
+  <div data-bind="html: header" class="ui segment"></div>
+  <div data-bind="html: jumbo" class="ui segment"></div>
+  <div data-bind="html: iframe"></div>
 </script>
 
 
 <script>
 
-
   System.import("ApplicationViewModel").then(function(app) {
-
-   var traceur = System.import("npm:traceur").then(function (traceur) {
-      return traceur;
-   });
-
-   ko.bindingHandlers.scriptTemplate = {
-
-    init: function(elem, valueAccessor) {
-        // Build an array of child elements
-        var child = ko.virtualElements.firstChild(elem),
-            childElems = [];
-        while (child) {
-            childElems.push(child);
-            child = ko.virtualElements.nextSibling(child);
-        }
-
-        // Remove them all, then put them back in a random order
-        ko.virtualElements.emptyNode(elem);
-        while(childElems.length) {
-            var randomIndex = Math.floor(Math.random() * childElems.length),
-                chosenChild = childElems.splice(randomIndex, 1);
-            ko.virtualElements.prepend(elem, chosenChild[0]);
-        }
-     }
-  };
-
-
-       ko.virtualElements.allowedBindings.randomOrder = true;
-
-       app.ApplicationViewModel.initialize();
-       debugger;
+      ko.virtualElements.allowedBindings.html = true;
+      app.ApplicationViewModel.initialize(); 
   });
 
 </script>
