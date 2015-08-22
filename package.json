@@ -21,6 +21,8 @@
   "jspm": {
     "directories": {},
     "dependencies": {
+      "autoprefixer": "npm:jspm-loader-css@^0.1.6",
+      "css": "npm:jspm-loader-css@^0.1.6",
       "guybedford/system-md": "github:guybedford/system-md@^0.0.1",
       "knockout": "github:knockout/knockout@^3.3.0",
       "traceur": "npm:traceur@^0.0.91"

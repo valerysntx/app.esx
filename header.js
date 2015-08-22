@@ -1,13 +1,15 @@
+import {css} from 'templates/header.css!';
+import {html} from './templates/header.md!md';   
 
 var Header = {
 	parse: function(){ 
-		return System.import('/templates/header.md!md')
-							.then((html)=>{ 
-								console.log(html); 
-								return html;
-							});
+		return Promise.resolve( html )
 	},
-	html: function(){ return Header.parse() }
+	html: function(){ 
+		return Header.parse().then((html)=>{ 
+			 return Promise.resolve( html ) ;
+	    }); 
+	}
 };
 
 export {Header}

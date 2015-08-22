@@ -1,5 +1,4 @@
 System.config({
-  "baseURL": "/",
   "transpiler": "traceur",
   "paths": {
     "*": "*.js",
@@ -10,7 +9,12 @@ System.config({
 
 System.config({
   "map": {
+    "autoprefixer":"autoprefixer.js",
+    "autoprefixer": "npm:jspm-loader-css@0.1.6",
+    "css": "npm:jspm-loader-css@0.1.6",
+    "css-modules-loader-core": "npm:css-modules-loader-core@0.0.10/lib",
     "guybedford/system-md": "github:guybedford/system-md@0.0.1",
+    "jspm-loader-css": "npm:jspm-loader-css@0.1.6",
     "knockout": "github:knockout/knockout@3.3.0",
     "md": "github:guybedford/system-md@0.0.1",
     "showdown@0.3.1": "jspm_packages/github/showdownjs/showdown@0.3.4/compressed/showdown.min",
@@ -84,6 +88,29 @@ System.config({
     "npm:core-util-is@1.0.1": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"
     },
+    "npm:css-modules-loader-core@0.0.10": {
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "postcss": "npm:postcss@4.1.16",
+      "postcss-modules-extract-imports": "npm:postcss-modules-extract-imports@0.0.5",
+      "postcss-modules-local-by-default": "npm:postcss-modules-local-by-default@0.0.9",
+      "postcss-modules-scope": "npm:postcss-modules-scope@0.0.7"
+    },
+    "npm:css-selector-tokenizer@0.4.1": {
+      "fastparse": "npm:fastparse@1.1.1"
+    },
+    "npm:css-selector-tokenizer@0.5.4": {
+      "cssesc": "npm:cssesc@0.1.0",
+      "fastparse": "npm:fastparse@1.1.1"
+    },
+    "npm:es6-promise@2.3.0": {
+      "assert": "github:jspm/nodelibs-assert@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.1",
+      "util": "github:jspm/nodelibs-util@0.1.0"
+    },
+    "npm:fastparse@1.1.1": {
+      "process": "github:jspm/nodelibs-process@0.1.1"
+    },
     "npm:glob@4.3.5": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",
       "events": "github:jspm/nodelibs-events@0.1.1",
@@ -104,6 +131,13 @@ System.config({
     "npm:inherits@2.0.1": {
       "util": "github:jspm/nodelibs-util@0.1.0"
     },
+    "npm:js-base64@2.1.9": {
+      "buffer": "github:jspm/nodelibs-buffer@0.1.0"
+    },
+    "npm:jspm-loader-css@0.1.6": {
+      "css-modules-loader-core": "npm:css-modules-loader-core@0.0.10",
+      "path": "npm:path@0.11.14"
+    },
     "npm:minimatch@2.0.10": {
       "brace-expansion": "npm:brace-expansion@1.1.0",
       "path": "github:jspm/nodelibs-path@0.1.0"
@@ -113,6 +147,33 @@ System.config({
     },
     "npm:path-browserify@0.0.0": {
       "process": "github:jspm/nodelibs-process@0.1.1"
+    },
+    "npm:path@0.11.14": {
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "process": "github:jspm/nodelibs-process@0.1.1",
+      "util": "github:jspm/nodelibs-util@0.1.0"
+    },
+    "npm:postcss-modules-extract-imports@0.0.5": {
+      "postcss": "npm:postcss@4.1.16",
+      "process": "github:jspm/nodelibs-process@0.1.1"
+    },
+    "npm:postcss-modules-local-by-default@0.0.9": {
+      "css-selector-tokenizer": "npm:css-selector-tokenizer@0.4.1",
+      "postcss": "npm:postcss@4.1.16"
+    },
+    "npm:postcss-modules-scope@0.0.7": {
+      "css-selector-tokenizer": "npm:css-selector-tokenizer@0.5.4",
+      "postcss": "npm:postcss@4.1.16",
+      "process": "github:jspm/nodelibs-process@0.1.1"
+    },
+    "npm:postcss@4.1.16": {
+      "es6-promise": "npm:es6-promise@2.3.0",
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "js-base64": "npm:js-base64@2.1.9",
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.1",
+      "source-map": "npm:source-map@0.4.4",
+      "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
     "npm:punycode@1.3.2": {
       "process": "github:jspm/nodelibs-process@0.1.1"
@@ -150,6 +211,10 @@ System.config({
       "amdefine": "npm:amdefine@1.0.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.1"
+    },
+    "npm:source-map@0.4.4": {
+      "amdefine": "npm:amdefine@1.0.0",
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
     "npm:stream-browserify@1.0.0": {
